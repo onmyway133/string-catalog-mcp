@@ -13,7 +13,7 @@
     "start": "node dist/index.js",
     "dev": "tsx src/index.ts",
     "inspect": "pnpm dlx @modelcontextprotocol/inspector tsx src/index.ts",
-    "mcp:add": "claude mcp add string-catalog-mcp -- tsx $PWD/src/index.ts",
+    "mcp:add": "claude mcp add string-catalog-mcp -- pnpm --dir=$PWD dlx tsx $PWD/src/index.ts",
     "mcp:remove": "claude mcp remove string-catalog-mcp",
     "typecheck": "tsc --noEmit",
     "lint": "eslint src/**/*.ts",
