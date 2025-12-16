@@ -32,7 +32,7 @@ Example input:
   ]
 }`;
 
-const translationEntrySchema = z.object({
+const translationSchema = z.object({
     language: z.string().describe('Language code (e.g., "en", "de", "no", "vi")'),
     value: z
         .string()
@@ -43,10 +43,15 @@ const translationEntrySchema = z.object({
         .describe('Translation state (defaults to "translated")'),
 });
 
-const dataEntrySchema = z.object({
+const translationsSchema = z.object({
     key: z.string().describe('The localization key'),
-    translations: z.array(translationEntrySchema).describe('Array of language translations'),
+    translations: z.array(translationSchema).describe('Array of language translations'),
     comment: z.string().optional().describe('Optional comment describing the string context'),
+});
+
+const inputSchema = z.object({
+    filePath: z.string().describe('Absolute path to the .xcstrings file'),
+    data: z.array(translationsSchema).describe('Array of translation entries to add or update'),
 });
 
 export function registerUpdateTranslations(server: McpServer) {
@@ -54,12 +59,7 @@ export function registerUpdateTranslations(server: McpServer) {
         'update_translations',
         {
             description: toolDescription,
-            inputSchema: {
-                filePath: z.string().describe('Absolute path to the .xcstrings file'),
-                data: z
-                    .array(dataEntrySchema)
-                    .describe('Array of translation entries to add or update'),
-            },
+            inputSchema,
         },
         async ({ filePath, data }) => {
             const catalog = new StringCatalog(filePath);
