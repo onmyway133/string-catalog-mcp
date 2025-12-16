@@ -2,7 +2,8 @@
 
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
-import { registerAllTools } from './tools/index';
+import { registerAllTools } from './mcp/tools/index';
+import { registerAllPrompts } from './mcp/prompts/index';
 
 const server = new McpServer({
     name: 'string-catalog-mcp',
@@ -10,6 +11,7 @@ const server = new McpServer({
 });
 
 registerAllTools(server);
+registerAllPrompts(server);
 
 async function main() {
     const transport = new StdioServerTransport();

@@ -1,6 +1,6 @@
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { z } from 'zod';
-import { StringCatalog } from '../string-catalog';
+import { StringCatalog } from '../../string-catalog';
 
 export function registerListSupportedLanguages(server: McpServer) {
     server.registerTool(
