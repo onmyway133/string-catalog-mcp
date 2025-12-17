@@ -13,18 +13,14 @@ pnpm build
 
 ## Usage with Claude Code
 
-```bash
-pnpm run mcp:add
-```
-
-Or manually add to your MCP config:
+Add to your MCP config:
 
 ```json
 {
   "mcpServers": {
     "string-catalog-mcp": {
-      "command": "node",
-      "args": ["/path/to/string-catalog-mcp/dist/index.js"]
+      "command": "pnpm",
+      "args": ["dlx", "string-catalog-mcp"]
     }
   }
 }
