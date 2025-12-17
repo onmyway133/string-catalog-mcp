@@ -31,6 +31,14 @@
   ],
   "author": "Khoa Pham",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/khoa/string-catalog-mcp.git"
+  },
+  "homepage": "https://github.com/khoa/string-catalog-mcp",
+  "bugs": {
+    "url": "https://github.com/khoa/string-catalog-mcp/issues"
+  },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.25.1",
     "zod": "^4.2.1"
