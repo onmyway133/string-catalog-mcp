@@ -33,11 +33,11 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/khoa/string-catalog-mcp.git"
+    "url": "git+https://github.com/onmyway133/string-catalog-mcp.git"
   },
-  "homepage": "https://github.com/khoa/string-catalog-mcp",
+  "homepage": "https://github.com/onmyway133/string-catalog-mcp",
   "bugs": {
-    "url": "https://github.com/khoa/string-catalog-mcp/issues"
+    "url": "https://github.com/onmyway133/string-catalog-mcp/issues"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.25.1",
