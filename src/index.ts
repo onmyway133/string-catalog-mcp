@@ -7,7 +7,7 @@ import { registerAllPrompts } from './mcp/prompts/index';
 
 const server = new McpServer({
     name: 'string-catalog-mcp',
-    version: '1.0.0',
+    version: '1.0.1',
 });
 
 registerAllTools(server);
