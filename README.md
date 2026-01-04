@@ -6,24 +6,10 @@ An MCP server for working with Xcode String Catalog (.xcstrings) files. It lets 
 
 ## Installation
 
+### Claude Code
+
 ```bash
-pnpm install
-pnpm build
-```
-
-## Usage with Claude Code
-
-Add to your MCP config:
-
-```json
-{
-  "mcpServers": {
-    "string-catalog-mcp": {
-      "command": "pnpm",
-      "args": ["dlx", "string-catalog-mcp"]
-    }
-  }
-}
+claude mcp add string-catalog-mcp -- npx string-catalog-mcp
 ```
 
 ---

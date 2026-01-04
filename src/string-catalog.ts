@@ -7,7 +7,7 @@ import {
     KeyTranslationsResult,
     KeyTranslation,
     LocalizationState,
-} from './types';
+} from './types.js';
 
 /**
  * StringCatalog class for reading and manipulating .xcstrings files

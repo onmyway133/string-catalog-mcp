@@ -1,13 +1,11 @@
-#!/usr/bin/env node
-
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
-import { registerAllTools } from './mcp/tools/index';
-import { registerAllPrompts } from './mcp/prompts/index';
+import { registerAllTools } from './mcp/tools';
+import { registerAllPrompts } from './mcp/prompts';
 
 const server = new McpServer({
     name: 'string-catalog-mcp',
-    version: '1.0.2',
+    version: '1.0.5',
 });
 
 registerAllTools(server);
