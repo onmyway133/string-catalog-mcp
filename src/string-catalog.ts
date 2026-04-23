@@ -142,12 +142,29 @@ export class StringCatalog {
             }
 
             for (const langTrans of langTranslations) {
-                entry.localizations[langTrans.language] = {
-                    stringUnit: {
-                        state: langTrans.state || 'translated',
-                        value: langTrans.value,
-                    },
-                };
+                if (langTrans.pluralForms && Object.keys(langTrans.pluralForms).length > 0) {
+                    const plural: Record<string, { stringUnit: { state: LocalizationState; value: string } }> = {};
+                    for (const [form, value] of Object.entries(langTrans.pluralForms)) {
+                        if (value !== undefined) {
+                            plural[form] = {
+                                stringUnit: {
+                                    state: langTrans.state || 'translated',
+                                    value,
+                                },
+                            };
+                        }
+                    }
+                    entry.localizations[langTrans.language] = {
+                        variations: { plural },
+                    };
+                } else if (langTrans.value !== undefined) {
+                    entry.localizations[langTrans.language] = {
+                        stringUnit: {
+                            state: langTrans.state || 'translated',
+                            value: langTrans.value,
+                        },
+                    };
+                }
             }
         }
 

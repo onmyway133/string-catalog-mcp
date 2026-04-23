@@ -49,14 +49,29 @@ export interface XCStrings {
     };
 }
 
+/** Plural form categories per CLDR rules */
+export type PluralForm = 'zero' | 'one' | 'two' | 'few' | 'many' | 'other';
+
 /**
- * Translation input format for the update tool
+ * Translation input format for the update tool.
+ * Use `value` for simple strings, `pluralForms` for count-dependent strings.
  */
 export interface TranslationInput {
     key: string;
     translations: {
         language: string;
-        value: string;
+        /** Simple string value. Mutually exclusive with pluralForms. */
+        value?: string;
+        /**
+         * Plural forms per CLDR rules. Use instead of `value` for strings like "%d day".
+         * Which forms are required depends on the language:
+         *   - 1-form languages (ja, ko, zh, th): only `other`
+         *   - 2-form languages (en, de, fr, es, it, nl, pt): `one` + `other`
+         *   - 3-form languages (ru): `one` + `few` + `many` (+ `other` for fractions)
+         *   - 4-form languages (pl): `one` + `few` + `many` + `other`
+         *   - 6-form languages (ar): `zero` + `one` + `two` + `few` + `many` + `other`
+         */
+        pluralForms?: Partial<Record<PluralForm, string>>;
         state?: LocalizationState;
     }[];
     comment?: string;
