@@ -6,6 +6,8 @@ import { createKeysCommand } from './commands/keys.js';
 import { createSearchCommand } from './commands/search.js';
 import { createGetCommand } from './commands/get.js';
 import { createUpdateCommand } from './commands/update.js';
+import { createMissingCommand } from './commands/missing.js';
+import { createStaleCommand } from './commands/stale.js';
 
 const program = new Command();
 program
@@ -19,5 +21,7 @@ program.addCommand(createKeysCommand());
 program.addCommand(createSearchCommand());
 program.addCommand(createGetCommand());
 program.addCommand(createUpdateCommand());
+program.addCommand(createMissingCommand());
+program.addCommand(createStaleCommand());
 
 program.parse();
