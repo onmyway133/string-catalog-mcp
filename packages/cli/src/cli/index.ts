@@ -2,6 +2,10 @@
 import { Command } from 'commander';
 import { createLanguagesCommand } from './commands/languages.js';
 import { createStatsCommand } from './commands/stats.js';
+import { createKeysCommand } from './commands/keys.js';
+import { createSearchCommand } from './commands/search.js';
+import { createGetCommand } from './commands/get.js';
+import { createUpdateCommand } from './commands/update.js';
 
 const program = new Command();
 program
@@ -11,5 +15,9 @@ program
 
 program.addCommand(createLanguagesCommand());
 program.addCommand(createStatsCommand());
+program.addCommand(createKeysCommand());
+program.addCommand(createSearchCommand());
+program.addCommand(createGetCommand());
+program.addCommand(createUpdateCommand());
 
 program.parse();
