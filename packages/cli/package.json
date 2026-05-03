@@ -11,7 +11,7 @@
     "scripts": {
         "build": "bun run build:lib && bun run build:cli",
         "build:lib": "bun build src/index.ts --outdir dist --target node --format esm",
-        "build:cli": "bun build src/cli/index.ts --outdir dist/cli --target node --format esm --banner '#!/usr/bin/env node'",
+        "build:cli": "bun build src/cli/index.ts --outdir dist/cli --target node --format esm",
         "typecheck": "tsc --noEmit",
         "prepublishOnly": "bun run build"
     },
