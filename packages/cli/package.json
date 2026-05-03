@@ -1,0 +1,33 @@
+{
+    "name": "string-catalog-cli",
+    "version": "1.0.0",
+    "type": "module",
+    "description": "CLI for managing Xcode String Catalog (.xcstrings) files",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "bin": {
+        "scat": "dist/cli/index.js"
+    },
+    "scripts": {
+        "build": "bun run build:lib && bun run build:cli",
+        "build:lib": "bun build src/index.ts --outdir dist --target node --format esm",
+        "build:cli": "bun build src/cli/index.ts --outdir dist/cli --target node --format esm --banner '#!/usr/bin/env node'",
+        "typecheck": "tsc --noEmit",
+        "prepublishOnly": "bun run build"
+    },
+    "keywords": ["xcode", "string-catalog", "xcstrings", "localization", "i18n", "cli"],
+    "author": "Khoa Pham",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/onmyway133/string-catalog-mcp.git"
+    },
+    "dependencies": {
+        "chalk": "^5.3.0",
+        "commander": "^12.1.0"
+    },
+    "devDependencies": {
+        "@types/node": "^20.10.0",
+        "typescript": "^5.3.0"
+    }
+}

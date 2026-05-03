@@ -40,8 +40,12 @@
   "bugs": {
     "url": "https://github.com/onmyway133/string-catalog-mcp/issues"
   },
+  "workspaces": [
+    "packages/*"
+  ],
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.25.1",
+    "string-catalog-cli": "workspace:*",
     "zod": "^4.2.1"
   },
   "devDependencies": {
