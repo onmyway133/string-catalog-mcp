@@ -1,6 +1,6 @@
 {
   "name": "string-catalog-mcp",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "type": "module",
   "description": "MCP server for interacting with Xcode String Catalog (.xcstrings) files",
   "main": "dist/index.js",
@@ -45,7 +45,7 @@
   ],
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.25.1",
-    "string-catalog-cli": "workspace:*",
+    "string-catalog-cli": "^1.0.0",
     "zod": "^4.2.1"
   },
   "devDependencies": {
