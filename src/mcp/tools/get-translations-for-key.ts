@@ -23,9 +23,7 @@ export function registerGetTranslationsForKey(server: McpServer) {
                         {
                             type: 'text' as const,
                             text: JSON.stringify(
-                                { error: `Key "${key}" not found in catalog` },
-                                null,
-                                2
+                                { error: `Key "${key}" not found in catalog` }
                             ),
                         },
                     ],
@@ -36,7 +34,7 @@ export function registerGetTranslationsForKey(server: McpServer) {
                 content: [
                     {
                         type: 'text' as const,
-                        text: JSON.stringify(result, null, 2),
+                        text: JSON.stringify(result),
                     },
                 ],
             };

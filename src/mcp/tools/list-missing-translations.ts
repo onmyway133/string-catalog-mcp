@@ -13,24 +13,37 @@ export function registerListMissingTranslations(server: McpServer) {
                 language: z
                     .string()
                     .optional()
-                    .describe(
-                        'Filter to a specific language code (e.g. "de"). If omitted, checks all supported languages.',
-                    ),
+                    .describe('Filter to a specific language code (e.g. "de"). If omitted, checks all supported languages.'),
+                limit: z
+                    .number()
+                    .optional()
+                    .default(50)
+                    .describe('Maximum number of results to return (default: 50)'),
+                offset: z
+                    .number()
+                    .optional()
+                    .default(0)
+                    .describe('Number of results to skip (for pagination, default: 0)'),
             },
         },
-        async ({ filePath, language }) => {
+        async ({ filePath, language, limit: limitArg, offset: offsetArg }) => {
+            const limit = limitArg ?? 50;
+            const offset = offsetArg ?? 0;
             const catalog = new StringCatalog(filePath);
-            const missing = catalog.getMissingTranslations(language);
+            const all = catalog.getMissingTranslations(language);
+            const paginated = all.slice(offset, offset + limit);
 
             return {
                 content: [
                     {
                         type: 'text' as const,
-                        text: JSON.stringify(
-                            { missingTranslations: missing, total: missing.length },
-                            null,
-                            2,
-                        ),
+                        text: JSON.stringify({
+                            missingTranslations: paginated,
+                            total: all.length,
+                            offset,
+                            limit,
+                            hasMore: offset + limit < all.length,
+                        }),
                     },
                 ],
             };

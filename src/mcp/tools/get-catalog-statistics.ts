@@ -20,7 +20,7 @@ export function registerGetCatalogStatistics(server: McpServer) {
                 content: [
                     {
                         type: 'text' as const,
-                        text: JSON.stringify(stats, null, 2),
+                        text: JSON.stringify(stats),
                     },
                 ],
             };

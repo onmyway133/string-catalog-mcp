@@ -13,25 +13,29 @@ export function registerSearchKeys(server: McpServer) {
                 query: z
                     .string()
                     .describe('Substring to search for in key names (case-insensitive)'),
+                limit: z
+                    .number()
+                    .optional()
+                    .default(50)
+                    .describe('Maximum number of results to return (default: 50)'),
             },
         },
-        async ({ filePath, query }) => {
+        async ({ filePath, query, limit: limitArg }) => {
+            const limit = limitArg ?? 50;
             const catalog = new StringCatalog(filePath);
-            const keys = catalog.searchKeys(query);
+            const allKeys = catalog.searchKeys(query);
+            const keys = allKeys.slice(0, limit);
 
             return {
                 content: [
                     {
                         type: 'text' as const,
-                        text: JSON.stringify(
-                            {
-                                query,
-                                matchingKeys: keys,
-                                count: keys.length,
-                            },
-                            null,
-                            2
-                        ),
+                        text: JSON.stringify({
+                            query,
+                            matchingKeys: keys,
+                            count: allKeys.length,
+                            truncated: allKeys.length > limit,
+                        }),
                     },
                 ],
             };

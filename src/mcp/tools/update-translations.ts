@@ -95,17 +95,13 @@ export function registerUpdateTranslations(server: McpServer) {
                 content: [
                     {
                         type: 'text' as const,
-                        text: JSON.stringify(
-                            {
+                        text: JSON.stringify({
                                 success: true,
                                 updatedKeys: result.updated,
                                 createdKeys: result.created,
                                 totalUpdated: result.updated.length,
                                 totalCreated: result.created.length,
-                            },
-                            null,
-                            2
-                        ),
+                            }),
                     },
                 ],
             };

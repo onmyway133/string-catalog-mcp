@@ -40,9 +40,7 @@ export function registerListAllKeys(server: McpServer) {
                                 offset,
                                 limit,
                                 hasMore: offset + limit < allKeys.length,
-                            },
-                            null,
-                            2
+                            }
                         ),
                     },
                 ],
