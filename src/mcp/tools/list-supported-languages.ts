@@ -21,15 +21,11 @@ export function registerListSupportedLanguages(server: McpServer) {
                 content: [
                     {
                         type: 'text' as const,
-                        text: JSON.stringify(
-                            {
+                        text: JSON.stringify({
                                 sourceLanguage,
                                 supportedLanguages: languages,
                                 count: languages.length,
-                            },
-                            null,
-                            2
-                        ),
+                            }),
                     },
                 ],
             };

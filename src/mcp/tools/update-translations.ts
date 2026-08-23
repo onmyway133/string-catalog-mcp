@@ -2,46 +2,11 @@ import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { z } from 'zod';
 import { StringCatalog } from '../../string-catalog';
 
-const toolDescription = `Update or add translations to a String Catalog. Accepts an array of translation entries.
+const toolDescription = `Update or add translations to a String Catalog.
 
-IMPORTANT: iOS strings support format placeholders that must be preserved in translations:
-- %@ for strings (objects)
-- %d or %lld for integers
-- %f for floating point numbers
-- %1$@, %2$@ etc. for positional arguments (order can be changed in translations)
-
-Use \`value\` for simple strings. Use \`pluralForms\` for count-dependent strings (e.g. "%d day").
-The required plural forms depend on the language:
-- 1-form (ja, ko, zh-Hans, zh-Hant, th): only "other"
-- 2-form (en, de, fr, es, it, nl, pt-PT): "one" + "other"
-- 3-form (ru): "one" + "few" + "many"
-- 4-form (pl): "one" + "few" + "many" + "other"
-- 6-form (ar): "zero" + "one" + "two" + "few" + "many" + "other"
-
-Example input:
-{
-  "data": [
-    {
-      "key": "hello_world",
-      "translations": [
-        { "language": "en", "value": "Hello World" },
-        { "language": "de", "value": "Hallo Welt" }
-      ],
-      "comment": "Greeting shown on home screen"
-    },
-    {
-      "key": "%d day",
-      "translations": [
-        { "language": "en", "pluralForms": { "one": "%d day", "other": "%d days" } },
-        { "language": "de", "pluralForms": { "one": "%d Tag", "other": "%d Tage" } },
-        { "language": "ja", "pluralForms": { "other": "%d 日" } },
-        { "language": "ar", "pluralForms": { "zero": "%d أيام", "one": "%d يوم", "two": "%d يومان", "few": "%d أيام", "many": "%d يومًا", "other": "%d يوم" } },
-        { "language": "ru", "pluralForms": { "one": "%d день", "few": "%d дня", "many": "%d дней" } },
-        { "language": "pl", "pluralForms": { "one": "%d dzień", "few": "%d dni", "many": "%d dni", "other": "%d dnia" } }
-      ]
-    }
-  ]
-}`;
+Preserve iOS format placeholders: %@ (string), %d/%lld (int), %f (float), %1$@ (positional).
+Use \`value\` for simple strings, \`pluralForms\` for count-dependent strings.
+Plural form counts by language: ja/ko/zh/th=1(other), en/de/fr=2(one+other), ru=3(one+few+many), pl=4(one+few+many+other), ar=6(zero+one+two+few+many+other).`;
 
 const pluralFormsSchema = z
     .object({
