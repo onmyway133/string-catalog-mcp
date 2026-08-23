@@ -27,55 +27,15 @@ export function registerTranslateStringsPrompt(server: McpServer) {
                         role: 'user',
                         content: {
                             type: 'text',
-                            text: `# Translation Request for iOS String Catalog
-
-## Keys to Translate
+                            text: `Translate these iOS string catalog keys from ${sourceLanguage} into: ${targetLangList.join(', ')}.
+${contextSection}
+Keys:
 ${keyList.map(k => `- "${k}"`).join('\n')}
 
-## Source Language
-${sourceLanguage}
+Preserve iOS placeholders exactly: %@ (string), %d/%lld (int), %f (float), %1$@ (positional — order can change per language grammar).
 
-## Target Languages
-${targetLangList.map(l => `- ${l}`).join('\n')}
-${contextSection}
-## iOS Format Placeholders
-When translating, preserve these iOS format placeholders exactly as they appear:
-- \`%@\` - String placeholder (objects)
-- \`%d\` or \`%lld\` - Integer placeholder
-- \`%f\` - Floating point number placeholder
-- \`%1$@\`, \`%2$@\` - Positional arguments (order CAN be changed to fit natural language grammar)
-
-## Example
-If source is: "Hello %@, you have %lld items"
-German could be: "Hallo %@, Sie haben %lld Artikel"
-Japanese could be: "%@さん、%lld個のアイテムがあります"
-
-## Instructions
-1. Translate each key into all target languages
-2. Preserve all format placeholders
-3. Ensure translations sound natural in each language
-4. Consider cultural context and localization best practices
-
-## Required Output Format
-Return the translations as JSON that can be used with the \`update_translations\` tool:
-
-\`\`\`json
-{
-    "data": [
-        {
-            "key": "key_name",
-            "translations": [
-                { "language": "en", "value": "English text" },
-                { "language": "de", "value": "German text" },
-                { "language": "fr", "value": "French text" }
-            ],
-            "comment": "Optional: describe where this string is used"
-        }
-    ]
-}
-\`\`\`
-
-Please translate the keys now.`,
+Return JSON for the update_translations tool:
+{"data":[{"key":"key_name","translations":[{"language":"en","value":"..."},{"language":"de","value":"..."}]}]}`,
                         },
                     },
                 ],

@@ -27,49 +27,16 @@ export function registerReviewTranslationsPrompt(server: McpServer) {
                         role: 'user',
                         content: {
                             type: 'text',
-                            text: `# Translation Review Request
-
-## String Catalog File
-${filePath}
+                            text: `Review translations in ${filePath}.
 ${langSection}${focusSection}
-## Review Checklist
+Check for:
+- Missing/mismatched iOS placeholders (%@, %d/%lld, %f, %1$@ positional)
+- Accuracy and natural phrasing for mobile UI
+- Consistency of terminology across keys
+- Translations significantly longer than source (space constraints)
 
-### 1. Format Placeholder Verification
-- Ensure all \`%@\`, \`%d\`, \`%lld\`, \`%f\` placeholders are preserved
-- Verify positional arguments (\`%1$@\`, \`%2$@\`) are used correctly
-- Check that placeholder count matches the source string
-
-### 2. Translation Quality
-- Verify translations are accurate and natural-sounding
-- Check for grammatical errors
-- Ensure translations fit the context of a mobile app UI
-
-### 3. Consistency
-- Similar strings should have consistent translations
-- Terminology should be uniform across the app
-- UI element names should match platform conventions
-
-### 4. Cultural Appropriateness
-- Verify idioms are properly localized
-- Check for culturally sensitive content
-- Ensure date/number formats are appropriate
-
-### 5. Length Considerations
-- Flag translations that are significantly longer than source
-- Consider UI space constraints for mobile apps
-
-## Instructions
-1. Use the \`get_catalog_statistics\` tool to see overall translation coverage
-2. Use the \`list_all_keys\` tool to see available keys
-3. Use the \`get_translations_for_key\` tool to examine specific translations
-4. Report any issues found with specific keys and languages
-5. Suggest corrections using the \`update_translations\` tool format
-
-## Output Format
-Provide a structured review report:
-- Summary of findings
-- List of issues by severity (critical, warning, suggestion)
-- Recommended fixes in JSON format for the update_translations tool`,
+Use \`get_catalog_statistics\` for coverage overview, \`list_all_keys\` to browse, \`get_translations_for_key\` to inspect specific entries.
+Report issues by severity (critical/warning/suggestion) with the key, language, and suggested fix in update_translations JSON format.`,
                         },
                     },
                 ],

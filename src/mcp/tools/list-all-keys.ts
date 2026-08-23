@@ -13,8 +13,8 @@ export function registerListAllKeys(server: McpServer) {
                 limit: z
                     .number()
                     .optional()
-                    .default(100)
-                    .describe('Maximum number of keys to return (default: 100)'),
+                    .default(50)
+                    .describe('Maximum number of keys to return (default: 50)'),
                 offset: z
                     .number()
                     .optional()
@@ -23,7 +23,7 @@ export function registerListAllKeys(server: McpServer) {
             },
         },
         async ({ filePath, limit: limitArg, offset: offsetArg }) => {
-            const limit = limitArg ?? 100;
+            const limit = limitArg ?? 50;
             const offset = offsetArg ?? 0;
             const catalog = new StringCatalog(filePath);
             const allKeys = catalog.getAllKeys();

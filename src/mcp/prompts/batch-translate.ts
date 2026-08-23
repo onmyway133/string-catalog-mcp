@@ -36,52 +36,26 @@ ${targetLangList.map(l => `- ${l}`).join('\n')}
 
 ## Workflow
 
-### Step 1: Analyze the Catalog
-Use \`get_catalog_statistics\` to understand the current translation coverage.
+### Step 1: Get missing keys
+Call \`list_missing_translations\` to get keys that need translation. Use \`limit\` and \`offset\` to page through results if \`hasMore\` is true.
 
-### Step 2: Identify Keys Needing Translation
-Use \`search_keys\` or \`list_all_keys\` to find:
-- Keys with missing translations for target languages
-${includeStale ? '- Keys with stale translations that need updating' : ''}
+### Step 2: Get source texts in bulk
+Call \`get_source_texts\` with all keys from one page at once — do NOT call \`get_translations_for_key\` in a loop.
 
-### Step 3: Translate in Batches
-For each batch of up to ${batchSize} keys:
-1. Get the source text using \`get_translations_for_key\`
-2. Translate to all target languages
-3. Prepare the JSON payload for \`update_translations\`
+### Step 3: Translate and save
+Translate all keys from the batch, then call \`update_translations\` once with the full payload.
 
-## iOS Format Placeholders Reference
-Preserve these placeholders in translations:
-- \`%@\` - String (object)
-- \`%d\` / \`%lld\` - Integer
-- \`%f\` - Float
-- \`%1$@\`, \`%2$@\` - Positional (can reorder for grammar)
+Repeat steps 1–3 with the next page until \`hasMore\` is false.
 
-## Output Format
-For each batch, provide:
+## iOS Format Placeholders
+Preserve: \`%@\` (string), \`%d\`/\`%lld\` (int), \`%f\` (float), \`%1$@\`/\`%2$@\` (positional — order can change).
 
+## Output Format per batch
 \`\`\`json
-{
-    "data": [
-        {
-            "key": "key_name",
-            "translations": [
-                { "language": "de", "value": "German translation" },
-                { "language": "fr", "value": "French translation" }
-            ]
-        }
-    ]
-}
+{"data":[{"key":"key_name","translations":[{"language":"de","value":"..."}]}]}
 \`\`\`
 
-## Instructions
-1. Start by analyzing the catalog
-2. Identify which keys need translation
-3. Process keys in batches
-4. After each batch, use \`update_translations\` to save
-5. Report progress after each batch
-
-Begin the batch translation process now.`,
+Begin now.`,
                         },
                     },
                 ],
